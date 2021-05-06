@@ -11,8 +11,8 @@ stateRoute.get('/states',async (req,res)=>{
     //console.log(statesArray)
     res.send(statesArray)
 
-
 })
+
 
 module.exports={
     stateRoute
