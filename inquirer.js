@@ -1,5 +1,8 @@
 const inquirer=require('inquirer')
 const axios=require('axios')
+const chalk = require('chalk')
+const beep = require('beepbeep')
+
 let  UserResponse
 async function RunQuery(){
     let Response=await axios.get('http://localhost:5000/getStates') //get a list of all states
@@ -40,16 +43,37 @@ async function RunQuery(){
 
    const choosenAge=UserResponse.user_age
    
-   setInterval(async()=>{
-    Response=await axios.get(`http://localhost:5000/checkAvailability?dist=${choosenDist}&age=${choosenAge}&stateId=${stateId}`)
-    const available=Response.data
-    if(available){
-            console.log('available')
+   // first time response to user 
+   Response=await axios.get(`http://localhost:5000/checkAvailability?dist=${choosenDist}&age=${choosenAge}&stateId=${stateId}`)
+    const availableData=Response.data
+    if(availableData.length>0){
+            
+            for(let item of availableData){
+                beep()
+                console.log(chalk.green(JSON.stringify(item)))
+                console.log('---------------------------------------------------------------------------------------------------------------')
+            }
     }
     else{
-        console.log('unavailable')
+        console.log(chalk.red('unavailable'))
     }
-   },10000)
+
+    // further subsequent responses
+   setInterval(async()=>{
+    Response=await axios.get(`http://localhost:5000/checkAvailability?dist=${choosenDist}&age=${choosenAge}&stateId=${stateId}`)
+    const availableData=Response.data
+    if(availableData.length>0){
+            
+            for(let item of availableData){
+                 beep()
+                console.log(chalk.green(JSON.stringify(item)))
+                console.log('---------------------------------------------------------------------------------------------------------------')
+            }
+    }
+    else{
+        console.log(chalk.red('unavailable'))
+    }
+   },6000)
 
 
 

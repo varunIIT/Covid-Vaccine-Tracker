@@ -2,7 +2,7 @@ const express=require('express')
 const app=express()
 const port=5000
 const{stateRoute}=require('./routers/stateRoute')
-const { checkAvailabilityRoute } = require('./routers/checkAvailability')
+const { checkAvailabilityRoute } = require('./routers/checkAvailabilityRoute')
 const { districtRoute } = require('./routers/districtRoute')
 
 app.use('/',stateRoute)

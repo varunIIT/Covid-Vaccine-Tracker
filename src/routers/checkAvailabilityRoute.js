@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { checkAvailability } = require('../controllers/availability')
+const { checkAvailability } = require('../controllers/checkAvailability')
 const checkAvailabilityRoute=require('express').Router()
 
 checkAvailabilityRoute.get('/checkAvailability',async (req,res)=>{
@@ -25,8 +25,8 @@ checkAvailabilityRoute.get('/checkAvailability',async (req,res)=>{
     const data=Response.data
     const centers=data.centers
 
-    let availabilityBool=checkAvailability(centers,age)
-    res.json(availabilityBool)
+    const availableData=checkAvailability(centers,age)
+    res.send(availableData)
 
 
 })
