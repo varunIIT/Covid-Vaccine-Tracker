@@ -1,10 +1,10 @@
 const checkAvailability=(centers,age)=>{
     let options=[]
     for(let center of centers){
-        console.log(center)
+        //console.log(center)
         for(let session of center.sessions){
             if(session.available_capacity>0){
-                console.log(session.min_age_limit)
+                //console.log(session.min_age_limit)
                 if(session.min_age_limit==45 && age.length==3){
                     let option={
                         Hospital:center.name,
