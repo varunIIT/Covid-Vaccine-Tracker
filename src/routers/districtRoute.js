@@ -1,6 +1,6 @@
 const districtRoute=require('express').Router()
 const axios=require('axios')
-districtRoute.get('/:stateName',async (req,res)=>{
+districtRoute.get('/getDistrict/:stateName',async (req,res)=>{
     let Response=await axios.get('https://www.cowin.gov.in/api/v2/admin/location/states')
     let data=Response.data
     //console.log(data)
@@ -21,7 +21,8 @@ districtRoute.get('/:stateName',async (req,res)=>{
         districtArray.push(district.district_name)
     }
     //console.log(districtArray)
-    res.send(districtArray)
+    const wrapArrayAndStateId={stateId,districtArray}
+    res.send(wrapArrayAndStateId)
 
 })
 module.exports={

@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const stateRoute=require('express').Router()
 
-stateRoute.get('/states',async (req,res)=>{
+stateRoute.get('/getStates',async (req,res)=>{
     const {data}=await axios.get('https://www.cowin.gov.in/api/v2/admin/location/states')
     let statesArray=[]
     for(let state of data.states){
